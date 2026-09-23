@@ -1,39 +1,58 @@
-how to make it work:
+# Customer CRUD (React + Vite + json-server)
 
-npm create vite@latest twquery -- --template react
-cd twquery
+A small full-stack-feeling CRUD app: a React frontend for viewing, searching,
+adding, editing, and deleting customer records, backed by a `json-server`
+mock REST API. Built as a React data-fetching / state-management exercise.
 
+## Stack
+
+- React 18 + Vite
+- Tailwind CSS
+- TanStack Query (`@tanstack/react-query`) for data fetching, caching, and mutations
+- Axios
+- `json-server` as a mock REST backend
+
+## Features
+
+- List customers in a searchable, paginated table
+- View a single customer's details
+- Add a new customer
+- Edit an existing customer
+- Delete a customer
+
+## Getting started
+
+Install dependencies:
+
+```bash
 npm install
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-npm i vite-plugin-svgr
-npm i @tanstack/react-query @tanstack/react-query-devtools axios
-npm install -D @faker-js/faker
-npm install @heroicons/react
-npm i react-intersection-observer
-npm install -g json-server
-npm install react react-dom
-npm install react-query
-npm i react-router-dom
-npm i daisyui
-json-server --watch customers.json
+```
 
-tailwind.config.js:
-...
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-...
+Start the mock API (serves data from `customers.json` on `http://localhost:3000`):
 
-main.css:
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+```bash
+npx json-server --watch customers.json
+```
 
+In a separate terminal, start the frontend:
 
-vite.config.js:
-import svgr from 'vite-plugin-svgr'
-...
-plugins: [react(), svgr()],
-...
+```bash
+npm run dev
+```
+
+Vite will print the local URL (typically `http://localhost:5173`).
+
+## Project structure
+
+```
+src/
+├── components/    # Layout, nav, and the main CRUD table
+├── user/          # Add / Edit / View pages for a single customer
+└── assets/        # Images
+```
+
+## Notes
+
+`customers.json` contains fake data generated for development purposes only
+(via [`@faker-js/faker`](https://fakerjs.dev/)) — no real customer
+information is used anywhere in this project.
